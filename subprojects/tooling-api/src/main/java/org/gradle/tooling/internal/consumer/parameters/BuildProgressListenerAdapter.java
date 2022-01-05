@@ -159,6 +159,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.WeakHashMap;
 
 /**
  * Converts progress events sent from the tooling provider to the tooling client to the corresponding event types available on the public Tooling API, and broadcasts the converted events to the
@@ -174,7 +175,7 @@ public class BuildProgressListenerAdapter implements InternalBuildProgressListen
     private final ListenerBroadcast<ProgressListener> transformProgressListeners = new ListenerBroadcast<ProgressListener>(ProgressListener.class);
     private final ListenerBroadcast<ProgressListener> testOutputProgressListeners = new ListenerBroadcast<ProgressListener>(ProgressListener.class);
     private final ListenerBroadcast<ProgressListener> fileDownloadListeners = new ListenerBroadcast<ProgressListener>(ProgressListener.class);
-    private final Map<Object, OperationDescriptor> descriptorCache = new HashMap<Object, OperationDescriptor>();
+    private final Map<Object, OperationDescriptor> descriptorCache = new WeakHashMap<Object, OperationDescriptor>();
 
     BuildProgressListenerAdapter(Map<OperationType, List<ProgressListener>> listeners) {
         List<ProgressListener> noListeners = Collections.emptyList();
